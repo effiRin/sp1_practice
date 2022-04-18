@@ -18,4 +18,6 @@ public class Board {
 
     private LocalDateTime regDate;
     private LocalDateTime updateDate;
+
+
 }
