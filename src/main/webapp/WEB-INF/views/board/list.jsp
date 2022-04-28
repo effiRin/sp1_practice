@@ -6,7 +6,9 @@
 <body>
 
 <h1> List page 입니다 ~! </h1>
-<h1> ${listDTO} </h1>
+
+<h1> ${cri}</h1>
+<h1> ${dtoList} </h1>
 
 
 <script>

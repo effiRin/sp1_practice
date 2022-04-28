@@ -14,7 +14,7 @@
 
 
     <select id="selectList" resultType="org.zerock.sp1_practice.domain.Board">
-    select bno, title, content, writer
+    select bno, title, content, writer, regDate, updateDate
     from tbl_board
     order by bno desc
     limit #{skip}, #{size}
