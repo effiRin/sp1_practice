@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.zerock.sp1_practice.domain.Board;
 import org.zerock.sp1_practice.dto.BoardDTO;
 import org.zerock.sp1_practice.dto.ListDTO;
+import org.zerock.sp1_practice.dto.ListResponseDTO;
 import org.zerock.sp1_practice.mapper.BoardMapper;
 
 import java.util.List;
@@ -21,14 +22,18 @@ public class BoardServiceImpl implements BoardService{
     private final ModelMapper modelMapper;
 
     @Override
-    public List<BoardDTO> getList(ListDTO listDTO) {
-        List<Board> boardList = boardMapper.selectList(listDTO.getSkip(), listDTO.getSize());
+    public ListResponseDTO<BoardDTO> getList(ListDTO listDTO) {
+
+        List<Board> boardList = boardMapper.selectList(listDTO);
 
         List<BoardDTO> dtoList =
                 boardList.stream()
                         .map(board -> modelMapper.map(board, BoardDTO.class))
                         .collect(Collectors.toList());
 
-        return dtoList;
+        return ListResponseDTO.<BoardDTO>builder()
+                .dtoList(dtoList)
+                .total(boardMapper.getTotal(listDTO))
+                .build();
     }
 }

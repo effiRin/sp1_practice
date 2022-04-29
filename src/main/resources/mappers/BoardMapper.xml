@@ -14,22 +14,52 @@
 
 
     <select id="selectList" resultType="org.zerock.sp1_practice.domain.Board">
-    select bno, title, content, writer, regDate, updateDate
-    from tbl_board
-    order by bno desc
-    limit #{skip}, #{size}
+        select bno, title, content, writer, regDate, updateDate
+        from tbl_board
+
+        <where>
+            <if test="keyword != null">
+                <foreach collection="types" item="item" separator="or" open="(" close=")">
+                    <if test='item = "t"'>
+                    title like concat('%', #{keyword}, '%')
+                    </if>
+                    <if test='item = "t"'>
+                        content like concat('%', #{keyword}, '%')
+                    </if>
+                    <if test='item = "t"'>
+                        writer like concat('%', #{keyword}, '%')
+                    </if>
+                </foreach>
+            </if>
+        </where>
+
+        order by bno desc
+        limit #{skip}, #{size}
+    </select>
+
+    <select id="getTotal" resultType="int">
+        select count(bno)
+        from tbl_board
     </select>
 
     <delete id="delete">
-        delete from tbl_board where bno = #{bno}
+        delete
+        from tbl_board
+        where bno = #{bno}
     </delete>
 
-    <select id = "selectOne" resultType="org.zerock.sp1_practice.domain.Board">
-        select * from tbl_board where bno = #{bno}
+    <select id="selectOne" resultType="org.zerock.sp1_practice.domain.Board">
+        select *
+        from tbl_board
+        where bno = #{bno}
     </select>
 
-    <update id = "update">
-        update tbl_board set title = #{title}, content = #{content}, updateDate = now() where bno = #{bno}
+    <update id="update">
+        update tbl_board
+        set title      = #{title},
+            content    = #{content},
+            updateDate = now()
+        where bno = #{bno}
     </update>
 
 </mapper>

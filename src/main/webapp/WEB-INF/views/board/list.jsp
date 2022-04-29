@@ -7,18 +7,13 @@
 
 <h1> List page 입니다 ~! </h1>
 
-<h1> ${cri}</h1>
-<h1> ${dtoList} </h1>
+${pageMaker}
 
+<hr>
+
+${dtoList}
 
 <script>
-
-        const result = '${result}'
-        console.log(result)
-
-    if(result !== ''){
-        alert("처리되었습니다")
-    }
 
 </script>
 

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.sp1_practice.dto.BoardDTO;
 import org.zerock.sp1_practice.dto.ListDTO;
+import org.zerock.sp1_practice.dto.ListResponseDTO;
+import org.zerock.sp1_practice.dto.PageMaker;
 import org.zerock.sp1_practice.service.BoardService;
 
 import java.util.List;
@@ -32,8 +34,14 @@ public class BoardController {
         log.info("board list...");
         log.info("Page : " + listDTO);
 
-        List<BoardDTO> dtoList = boardService.getList(listDTO);
-        model.addAttribute("dtoList" ,dtoList);
+        ListResponseDTO<BoardDTO> responseDTO = boardService.getList(listDTO);
+        model.addAttribute("dtoList" ,responseDTO.getDtoList());
+
+        int total = responseDTO.getTotal();
+        model.addAttribute("pageMaker", new PageMaker(listDTO.getPage(), total));
+
+        // model.addAttribute("dtoList" , total);  -> PageMaker 안에 total이 있기 떄문에 없어도 될듯
+
     }
 
     @PostMapping("/register")
