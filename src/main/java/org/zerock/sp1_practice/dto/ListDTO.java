@@ -25,7 +25,7 @@ public class ListDTO {
         this.keyword = keyword;
     }
 
-    public String[] getTypes(){
+    public String[] getType(){
         if (type == null){
             return new String[]{}; // 빈 배열
         }

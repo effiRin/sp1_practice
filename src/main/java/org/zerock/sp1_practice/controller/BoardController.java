@@ -35,10 +35,12 @@ public class BoardController {
         log.info("Page : " + listDTO);
 
         ListResponseDTO<BoardDTO> responseDTO = boardService.getList(listDTO);
-        model.addAttribute("dtoList" ,responseDTO.getDtoList());
+        model.addAttribute("dtoList", responseDTO.getDtoList());
 
         int total = responseDTO.getTotal();
         model.addAttribute("pageMaker", new PageMaker(listDTO.getPage(), total));
+
+//        model.addAttribute("ListDTO", listDTO); -> 이거 안해줘도 나옴
 
         // model.addAttribute("dtoList" , total);  -> PageMaker 안에 total이 있기 떄문에 없어도 될듯
 
