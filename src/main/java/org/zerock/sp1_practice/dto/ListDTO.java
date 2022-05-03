@@ -2,6 +2,11 @@ package org.zerock.sp1_practice.dto;
 
 import lombok.Getter;
 import lombok.ToString;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 @ToString
 @Getter
@@ -9,8 +14,10 @@ public class ListDTO {
 
     private int page;
     private int size;
+
     private String type;
     private String keyword;
+    private String link;
 
     public ListDTO(){
         this.page = 1;
@@ -46,6 +53,30 @@ public class ListDTO {
 
     public int getSkip(){
         return (this.page - 1) * size;
+    }
+
+    public String getLink(){
+
+        UriComponentsBuilder builder = UriComponentsBuilder.newInstance();
+                builder.queryParam("page", getPage())
+                .queryParam("size", getSize());
+
+                if(type != null){
+                    builder.queryParam("type", type);
+                }
+
+                if(keyword != null){
+                    try {
+                        String enStr = URLEncoder.encode("세종 대왕 만세", "UTF-8");
+                        builder.queryParam("keyword", "세종 대왕 만세");
+
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+        return builder.build().toString();
+
     }
 
 }

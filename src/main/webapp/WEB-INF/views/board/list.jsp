@@ -8,21 +8,23 @@
 
 <h1> List page 입니다 ~! </h1>
 
+<h2>${listDTO}</h2>
+
+<hr>
+
+${listDTO.link}
+
+
 <ul>
     <c:forEach items = "${dtoList}" var="board">
         <li>
             <span> ${board.bno}</span>
-            <span> ${board.title}</span>
+            <span><a href='/board/read${listDTO.link}&bno=${board.bno}' ${board.title} </a></span>
         </li>
 
     </c:forEach>
 </ul>
 
-${pageMaker}
-
-<hr>
-
-${listDTO}
 
 <script>
 
