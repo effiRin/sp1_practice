@@ -26,7 +26,7 @@ public class BoardController {
 
     @GetMapping("/")
     public String basic(){
-        return "redirect:/board/list";
+        return "redirect:/list";
     }
 
     @GetMapping("/list")
@@ -41,7 +41,6 @@ public class BoardController {
         model.addAttribute("pageMaker", new PageMaker(listDTO.getPage(), total));
 
 //        model.addAttribute("ListDTO", listDTO); -> 이거 안해줘도 나옴
-
         // model.addAttribute("dtoList" , total);  -> PageMaker 안에 total이 있기 떄문에 없어도 될듯
 
     }

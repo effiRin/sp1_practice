@@ -25,7 +25,6 @@
     <insert id="insert">
         <selectKey resultType="int" keyProperty="bno" order="AFTER">
             select last_insert_id()
-
         </selectKey>
         insert into tbl_board(title, content, writer)
         values (#{title}, #{content}, #{writer})

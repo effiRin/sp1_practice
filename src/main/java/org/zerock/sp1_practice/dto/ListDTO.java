@@ -2,7 +2,6 @@ package org.zerock.sp1_practice.dto;
 
 import lombok.Getter;
 import lombok.ToString;
-import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.UnsupportedEncodingException;
@@ -32,15 +31,15 @@ public class ListDTO {
         this.keyword = keyword;
     }
 
-    public String[] getType(){
-        if (type == null){
+    public String[] getTypes(){
+        if (type == null || type.trim().length() == 0){
             return new String[]{}; // 빈 배열
         }
         return type.split("");
     }
 
     public String getKeyword(){
-        return keyword;
+        return keyword == null || keyword.trim().length() == 0 ? null : keyword.trim();
     }
 
     public void setPage(int page){
@@ -67,8 +66,8 @@ public class ListDTO {
 
                 if(keyword != null){
                     try {
-                        String enStr = URLEncoder.encode("세종 대왕 만세", "UTF-8");
-                        builder.queryParam("keyword", "세종 대왕 만세");
+                        String enStr = URLEncoder.encode("keyword", "UTF-8");
+                        builder.queryParam("keyword", enStr);
 
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
