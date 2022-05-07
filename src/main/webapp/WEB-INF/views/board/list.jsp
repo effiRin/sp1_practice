@@ -18,8 +18,8 @@
     <select class="type">
         <option value="">---</option>
         <option value="t" ${listDTO.type =="t"?"selected":""}>제목</option>
-        <option value="tc" ${listDTO.type =="tc"?"selected":""}>제목 내용</option>
-        <option value="tcw" ${listDTO.type =="tcw"?"selected":""}>제목 내용 작성자</option>
+        <option value="tc" ${listDTO.type =="tc"?"selected":""}>제목내용</option>
+        <option value="tcw" ${listDTO.type =="tcw"?"selected":""}>제목내용작성자</option>
     </select>
     <input type="text" name="keyword" value="${listDTO.keyword}">
     <button class = "searchBtn">Search</button>
@@ -86,7 +86,6 @@ ${pageMaker}
     for (const tag of linkTags){
         tag.addEventListener("click", (e)=>{
             e.preventDefault()
-            console.log(tag.getAttribute("href"))
             const pageNum = tag.getAttribute("href")
 
             actionForm.querySelector("input[name='page']").value = pageNum
@@ -95,7 +94,7 @@ ${pageMaker}
         },false)
     }
 
-    document.querySelector(".searchBtn").addEventListener("click", (e) =>  {
+    document.querySelector(".searchBtn").addEventListener("click", (e) =>{
         const type = document.querySelector('.searchDiv .type').value
         const keyword = document.querySelector(".searchDiv input[name='keyword']").value
 
