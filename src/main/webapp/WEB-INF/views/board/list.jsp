@@ -12,7 +12,18 @@
 
 <hr>
 
-${listDTO.link}
+<h3>${listDTO.link}</h3>
+
+<div class="searchDiv">
+    <select class="type">
+        <option value="">---</option>
+        <option value="t" ${listDTO.type =="t"?"selected":""}>제목</option>
+        <option value="tc" ${listDTO.type =="tc"?"selected":""}>제목 내용</option>
+        <option value="tcw" ${listDTO.type =="tcw"?"selected":""}>제목 내용 작성자</option>
+    </select>
+    <input type="text" name="keyword" value="${listDTO.keyword}">
+    <button class = "searchBtn">Search</button>
+</div>
 
 <ul>
     <c:forEach items = "${dtoList}" var="board">
@@ -64,11 +75,11 @@ ${pageMaker}
     <input type="hidden" name="size" value="${listDTO.size}">
     <input type="hidden" name="type" value="${listDTO.type == null? '' : listDTO.type}">
     <input type="hidden" name="keyword" value="${listDTO.keyword == null? '' : listDTO.keyword}">
-
 </form>
 
 <script>
     const linkTags = document.querySelectorAll(".page-link")
+    const actionForm = document.querySelector(".actionForm")
 
     console.log(linkTags)
 
@@ -78,14 +89,24 @@ ${pageMaker}
             console.log(tag.getAttribute("href"))
             const pageNum = tag.getAttribute("href")
 
-            const actionForm = document.querySelector(".actionForm")
             actionForm.querySelector("input[name='page']").value = pageNum
             actionForm.submit()
 
         },false)
     }
 
+    document.querySelector(".searchBtn").addEventListener("click", (e) =>  {
+        const type = document.querySelector('.searchDiv .type').value
+        const keyword = document.querySelector(".searchDiv input[name='keyword']").value
 
+        console.log(type, keyword)
+
+        actionForm.querySelector("input[name='page']").value = 1
+        actionForm.querySelector("input[name='type']").value = type
+        actionForm.querySelector("input[name='keyword']").value = keyword
+        actionForm.submit()
+
+    }, false)
 
 </script>
 
