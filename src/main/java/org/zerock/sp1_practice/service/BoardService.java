@@ -8,4 +8,6 @@ public interface BoardService {
 
     ListResponseDTO<BoardDTO> getList(ListDTO listDTO);  // 목록 데이터 처리할 때 얘를 이용
 
+    BoardDTO getOne(Integer bno);
+
 }
